@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from to_do_list_app.utils.models.base import BaseModel
+from utils.models.base_model import BaseModel
 
 
 class Color(BaseModel):

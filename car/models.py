@@ -1,9 +1,9 @@
 from django.db import models
 
 # Create your models here.
-from to_do_list_app.color.models import Color
-from to_do_list_app.model_car.models import ModelCar
-from to_do_list_app.utils.models.base import BaseModel
+from color.models import Color
+from model_car.models import ModelCar
+from utils.models.base_model import BaseModel
 
 
 class Car(BaseModel):

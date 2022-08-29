@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
-from to_do_list_app.utils.models.base import BaseModel
+from utils.models.base_model import BaseModel
 
 
 class Person(BaseModel, AbstractUser):

@@ -1,9 +1,9 @@
 from django.db import models
 
 # Create your models here.
-from to_do_list_app.car.models import Car
-from to_do_list_app.person.models import Person
-from to_do_list_app.utils.models.base import BaseModel
+from car.models import Car
+from person.models import Person
+from utils.models.base_model import BaseModel
 
 
 class Owner(BaseModel):
