@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-tav5!n^sk=sc0y2w*s^v02wfdj4ija8%y67st0@^xu%x6(ww*%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'car',
+    'color',
+    'model_car',
+    'owner',
+    'person',
+    'sale',
+    'store'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +82,12 @@ WSGI_APPLICATION = 'to_do_list_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'to-do-list-app',
+        'USER': 'antonio',
+        'PASSWORD': 'jesusmaria',
+        'HOST': 'localhost',
+        'PORT': 3306,
     }
 }
 
@@ -111,6 +122,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'person.Person'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
