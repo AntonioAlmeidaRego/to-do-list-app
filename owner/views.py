@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from owner.models import Owner
-from owner.repository.OwnerRepository import OwnerRepository
+from owner.repository.owner_repository import OwnerRepository
 from store.repository.store_repository import StoreRepository
 from utils.request.req import is_method_post
 from utils.request.required.required_field import required_field

@@ -7,6 +7,14 @@ class OwnerRepository:
         return Owner.objects.all()
 
     @staticmethod
+    def find_by_last():
+        return Owner.objects.all().order_by('-created_at').first()
+
+    @staticmethod
+    def count():
+        return len(Owner.objects.all())
+
+    @staticmethod
     def find_by_pk(pk):
         try:
             return Owner.objects.get(id=pk)

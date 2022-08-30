@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from car.repository.car_repository import CarRepository
+from owner.repository.owner_repository import OwnerRepository
+from sale.repository.sale_repository import SaleRepository
 from utils.authentication.authentication import auth
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
@@ -36,4 +39,12 @@ def logout(request):
 @login_required(login_url='/')
 def dashboard(req):
     template_name = 'dashboard.html'
-    return render(req, template_name)
+    return render(req, template_name, {
+        'context': {
+            'len_cars': CarRepository.count(),
+            'len_owners': OwnerRepository.count(),
+            'len_sales': SaleRepository.count(),
+            'last_owner': OwnerRepository.find_by_last(),
+            'last_car': CarRepository.find_by_last()
+        }
+    })

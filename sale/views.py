@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from car.repository.car_repository import CarRepository
 from owner.models import Owner
-from owner.repository.OwnerRepository import OwnerRepository
+from owner.repository.owner_repository import OwnerRepository
 from sale.models import Sale
 from sale.repository.sale_repository import SaleRepository
 from store.repository.store_repository import StoreRepository

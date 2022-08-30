@@ -6,7 +6,7 @@ from car.models import Car
 from car.repository.car_repository import CarRepository
 from color.repository.color_repository import ColorRepository
 from model_car.repository.model_repository import ModelCarRepository
-from owner.repository.OwnerRepository import OwnerRepository
+from owner.repository.owner_repository import OwnerRepository
 from store.repository.store_repository import StoreRepository
 from utils.request.req import is_method_post
 
