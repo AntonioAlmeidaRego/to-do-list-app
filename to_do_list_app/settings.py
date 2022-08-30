@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'to_do_list_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_DATABASE_NAME'),
-        'USER': config('MYSQL_USER'),
-        'PASSWORD': config('MYSQL_PASSWORD'),
-        'HOST': config('MYSQL_HOST'),
-        'PORT': config('MYSQL_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DATABASE_DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
     }
 }
 
