@@ -125,6 +125,53 @@
             </div> <!-- end card -->
         </div><!-- end col-->
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="header-title">Última Venda</h4>
+                    </div>
+                    <div class="row text-center mt-2 py-2">
+                        <div class="col-sm-3">
+                            <div class="my-2 my-sm-0">
+                                <i class="mdi mdi-trending-up text-success mt-3 h3"></i>
+                                <p class="text-muted font-15 mb-0">R$ {{context.last_sale.price}}</p>
+                                <p class="text-muted mb-0" style="font-weight: bold;">Preço</p>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="my-2 my-sm-0">
+                                <i class="mdi mdi-trending-down text-primary mt-3 h3"></i>
+                                <p class="text-muted font-15 mb-0">{{context.last_sale.car}}</p>
+                                <p class="text-muted mb-0" style="font-weight: bold;">Carro</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="my-2 my-sm-0">
+                                <i class="mdi mdi-trending-up text-success mt-3 h3"></i>
+                                <p class="text-muted font-15 mb-0">{{context.last_sale.owner}}</p>
+                                <p class="text-muted mb-0" style="font-weight: bold;">Proprietário</p>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="my-2 my-sm-0">
+                                <i class="mdi mdi-trending-down text-primary mt-3 h3"></i>
+                                <p class="text-muted font-15 mb-0">{{context.last_sale.store}}</p>
+                                <p class="text-muted mb-0" style="font-weight: bold;">Loja</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row-->
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
     <!-- end row-->
 
 </div>

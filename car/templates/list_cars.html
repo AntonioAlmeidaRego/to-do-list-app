@@ -1,12 +1,14 @@
-{% extends 'header.html' %}
-{% block title %} Listagem de Cores {% endblock %}
+{% extends 'dashboard_base.html' %}
+{% block title %} Listagem de Carros {% endblock %}
 
-{% block content %}
+{% block body %}
 <div class="container">
     <table class="table table-centered mb-0">
         <thead>
         <tr>
             <th>Nome</th>
+            <th>Cor</th>
+            <th>Modelo</th>
             <th>Ações</th>
         </tr>
         </thead>
@@ -14,6 +16,8 @@
         {% for car in context.cars %}
         <tr>
             <td>{{car.name}}</td>
+            <td>{{car.color}}</td>
+            <td>{{car.model}}</td>
             <td>
                 <a href="{% url 'update_cars' car.id %}" class="btn btn-light"><i class="fa-solid fa-pen-clip"></i></a>
                 <a href="{% url 'delete_cars' car.id %}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>

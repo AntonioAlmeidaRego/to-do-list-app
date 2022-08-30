@@ -1,7 +1,7 @@
-{% extends 'header.html' %}
+{% extends 'dashboard_base.html' %}
 {% block title %} Criação de Modelo {% endblock %}
 
-{% block content %}
+{% block body %}
 <div class="container-fluid">
     {% if context.message_error is not None %}
     <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
@@ -25,7 +25,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Modelo</button>
-        <a href="{% url 'list_colors' %}" class="btn btn-primary"><i class="fa-solid fa-list"></i> Modelos</a>
+        <a href="{% url 'list_models' %}" class="btn btn-primary"><i class="fa-solid fa-list"></i> Modelos</a>
     </form>
 
 </div>

@@ -2,7 +2,7 @@ from django.contrib.auth import (
     authenticate,
 )
 
-from person.models import Person
+from django.contrib.auth.models import User
 
 
 def auth(email=None, password=None, call_back_success=None, call_back_error=None):
@@ -11,7 +11,7 @@ def auth(email=None, password=None, call_back_success=None, call_back_error=None
         message_error = "Usuário Inválido"
         if call_back_success:
             try:
-                user = Person.objects.get(username=email)
+                user = User.objects.get(username=email)
 
                 if not user:
                     return call_back_error(message_error)

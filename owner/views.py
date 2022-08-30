@@ -4,9 +4,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from owner.models import Owner
 from owner.repository.owner_repository import OwnerRepository
+from sale.repository.sale_repository import SaleRepository
 from store.repository.store_repository import StoreRepository
 from utils.request.req import is_method_post
 from utils.request.required.required_field import required_field
+from utils.serialize.cars.serialize_cars import serialize_by_sales
 
 
 def call_create(name, email, call_back_success, call_back_error):
@@ -77,7 +79,7 @@ def update(req, pk):
 
     return render(req, template_name, {
         'context': {
-            'cars': instance_owner.cars.all(),
+            'cars': serialize_by_sales(SaleRepository.find_many_by_owner(instance_owner.id)),
             'instance': instance_owner
         }
     })
@@ -97,6 +99,21 @@ def delete(req, pk):
     instance_owner.delete()
 
     return redirect('list_owners')
+
+
+@login_required(login_url='/')
+def details(req, pk):
+    instance_owner: Owner = get_object_or_404(Owner, pk=pk)
+    template_name = 'details_owners.html'
+
+    context = {
+        'instance': instance_owner,
+        'cars': serialize_by_sales(SaleRepository.find_many_by_owner(instance_owner.id)),
+    }
+
+    return render(req, template_name, {
+        'context': context
+    })
 
 
 @login_required(login_url='/')

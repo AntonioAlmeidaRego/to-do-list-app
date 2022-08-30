@@ -7,6 +7,10 @@ class SaleRepository:
         return Sale.objects.all()
 
     @staticmethod
+    def find_by_last():
+        return Sale.objects.all().order_by('-created_at').first()
+
+    @staticmethod
     def find_many_by_owner(pk):
         return Sale.objects.filter(owner__id=pk)
 

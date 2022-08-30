@@ -45,6 +45,7 @@ def dashboard(req):
             'len_owners': OwnerRepository.count(),
             'len_sales': SaleRepository.count(),
             'last_owner': OwnerRepository.find_by_last(),
-            'last_car': CarRepository.find_by_last()
+            'last_car': CarRepository.find_by_last(),
+            'last_sale': SaleRepository.find_by_last()
         }
     })

@@ -1,7 +1,7 @@
-{% extends 'header.html' %}
+{% extends 'dashboard_base.html' %}
 {% block title %} Listagem de Proprietários {% endblock %}
 
-{% block content %}
+{% block body %}
 <div class="container">
     <table class="table table-centered mb-0">
         <thead>
@@ -15,6 +15,7 @@
         <tr>
             <td>{{owner.name}}</td>
             <td>
+                <a href="{% url 'details_owners' owner.id %}" class="btn btn-light"><i class="fa-solid fa-circle-info"></i></a>
                 <a href="{% url 'update_owners' owner.id %}" class="btn btn-light"><i class="fa-solid fa-pen-clip"></i></a>
                 <a href="{% url 'delete_owners' owner.id %}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
             </td>
