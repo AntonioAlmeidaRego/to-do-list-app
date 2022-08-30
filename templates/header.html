@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="{% static '/assets/css/app.min.css' %}"/>
     <link rel="stylesheet" href="{% static '/assets/css/icons.min.css' %}"/>
 </head>
-<body>
+<body class="show" data-layout-color="light" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-theme="dark">
 {% block content %}{% endblock %}
+{% include 'footer.html' %}
 </body>
 </html>

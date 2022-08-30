@@ -1,4 +1,5 @@
 {% extends 'header.html' %}
+{% block content %}
 <div class="wrapper">
     <!-- ========== Left Sidebar Start ========== -->
     {% include 'dashboard_menu.html' %}
@@ -10,7 +11,8 @@
 
     <div class="content-page">
         <div class="content">
-            {% block content %}{% endblock %}
+            {% block body %}
+            {% endblock %}
         </div> <!-- content -->
 
         <!-- Footer Start -->
@@ -41,3 +43,4 @@
 
 
 </div>
+{% endblock %}
