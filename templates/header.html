@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="{% static '/assets/css/vendor/jquery-jvectormap-1.2.2.css' %}"/>
+    <link rel="stylesheet" href="{% static '/assets/css/app.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/assets/css/icons.min.css' %}"/>
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>

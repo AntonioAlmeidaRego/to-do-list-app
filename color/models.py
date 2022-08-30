@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from utils.models.base_model import BaseModel
+from utils.models.to_str import str_choices_color
 
 
 class Color(BaseModel):
@@ -17,4 +18,4 @@ class Color(BaseModel):
     type_color = models.PositiveIntegerField(choices=COLORS, blank=True, null=False)
 
     def __str__(self):
-        return self.COLORS.__str__()
+        return str_choices_color(self)

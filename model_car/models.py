@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from utils.models.base_model import BaseModel
+from utils.models.to_str import str_choices_model
 
 
 class ModelCar(BaseModel):
@@ -17,4 +18,4 @@ class ModelCar(BaseModel):
     type_model = models.PositiveIntegerField(choices=MODELS, blank=True, null=False)
 
     def __str__(self):
-        return self.MODELS.__str__()
+        return str_choices_model(self)

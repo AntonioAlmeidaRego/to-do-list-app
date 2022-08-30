@@ -1,0 +1,47 @@
+{% extends 'header.html' %}
+{% block title %} Criação de Carro {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% if context.message_error is not None %}
+    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
+         role="alert">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+        <strong>Aviso - </strong> {{ context.message_error }}
+    </div>
+    {% endif %}
+    <form action="{% url 'create_cars' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" id="name" name="name" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="models-select" class="form-label">Modelos</label>
+            <div class="mb-3">
+                <select name="model" class="form-select" id="models-select">
+                    <option>Selecione um Modelo</option>
+                    {% for model in context.models %}
+                    <option value="{{model.id}}">{{model}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="colors-select" class="form-label">Colores</label>
+            <div class="mb-3">
+                <select name="color" class="form-select" id="colors-select">
+                    <option>Selecione uma Cor</option>
+                    {% for color in context.colors %}
+                    <option value="{{color.id}}">{{color}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Carro</button>
+        <a href="{% url 'list_cars' %}" class="btn btn-primary"><i class="fa-solid fa-list"></i> Carros</a>
+    </form>
+
+</div>
+{% endblock %}
