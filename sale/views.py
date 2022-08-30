@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
@@ -42,7 +43,7 @@ def call_update(instance, price, owner, car, call_back_success, call_back_error)
             instance.owner = OwnerRepository.find_by_pk(owner)
             instance.car = CarRepository.find_pk(car)
             instance.save()
-            return call_back_success('Venda salva com sucesso!')
+            return call_back_success('Venda alterada com sucesso!')
     except Exception as e:
         print("error: ", e)
         ...
@@ -54,11 +55,11 @@ def create(req):
     template_name = 'create_sales.html'
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
     def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_sales')
 
     if is_method_post(req):
@@ -81,11 +82,11 @@ def update(req, pk):
     template_name = 'update_sales.html'
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
     def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_sales')
 
     if is_method_post(req):

@@ -3,14 +3,7 @@
 
 {% block body %}
 <div class="container-fluid">
-    {% if context.message_error is not None %}
-    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
-         role="alert">
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
-                aria-label="Close"></button>
-        <strong>Aviso - </strong> {{ context.message_error }}
-    </div>
-    {% endif %}
+    {% include 'messages.html' %}
     <form action="{% url 'update_owners' context.instance.id %}" method="post">
         {% csrf_token %}
         <div class="mb-3">

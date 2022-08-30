@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -15,7 +16,8 @@ def call_create(type_color, call_back_success, call_back_error):
             if not instance_db:
                 instance = ModelCar()
                 instance.type_model = type_color
-                return call_back_success(instance.save())
+                instance.save()
+                return call_back_success('Modelo salvo com sucesso!')
             return call_back_error('Modelo já salvo, tente outro!')
     except Exception as e:
         print("error: ", e)
@@ -31,11 +33,11 @@ def create(req):
     context = {}
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
-    def call_back_success(type):
+    def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_models')
 
     if is_method_post(req):

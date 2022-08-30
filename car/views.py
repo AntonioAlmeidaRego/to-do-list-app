@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -15,7 +16,6 @@ def call_create(name, color, model, call_back_success, call_back_error):
     try:
         if color and name and model:
             instance_color = ColorRepository.find_by_pk(color)
-            print(instance_color)
             instance_model = ModelCarRepository.find_by_pk(model)
             if instance_color and instance_model:
                 instance = Car()
@@ -23,7 +23,7 @@ def call_create(name, color, model, call_back_success, call_back_error):
                 instance.color = instance_color
                 instance.name = name
                 instance.save()
-                store = StoreRepository.create_or_get('Carford')
+                store = StoreRepository.create_or_get()
                 store.cars.add(instance)
                 return call_back_success('Carro salvo com sucesso!')
     except Exception as e:
@@ -42,7 +42,7 @@ def call_update(instance, name, color, model, call_back_success, call_back_error
                 instance.color = instance_color
                 instance.name = name
                 instance.save()
-                return call_back_success('Carro salvo com sucesso!')
+                return call_back_success('Carro Alterado com sucesso!')
     except Exception as e:
         print("error: ", e)
         ...
@@ -54,11 +54,11 @@ def create(req):
     template_name = 'create_car.html'
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
     def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_cars')
 
     if is_method_post(req):
@@ -81,11 +81,11 @@ def update(req, pk):
     template_name = 'update_car.html'
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
     def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_cars')
 
     if is_method_post(req):
@@ -107,7 +107,7 @@ def update(req, pk):
 def delete(req, pk):
     instance_car = get_object_or_404(Car, pk=pk)
 
-    store = StoreRepository.create_or_get('Carford')
+    store = StoreRepository.create_or_get()
 
     owner = OwnerRepository.find_by_car(instance_car)
 
@@ -118,6 +118,8 @@ def delete(req, pk):
     if owner:
         owner.cars.remove(instance_car)
     instance_car.delete()
+
+    messages.success(request=req, message='Carro removido com sucesso!')
 
     return redirect('list_cars')
 

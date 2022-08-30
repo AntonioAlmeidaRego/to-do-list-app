@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
@@ -32,7 +33,7 @@ def call_update(instance, name, email, call_back_success, call_back_error):
             instance.name = name
             instance.email = email
             instance.save()
-            return call_back_success('Proprietário salvo com sucesso!')
+            return call_back_success('Proprietário alterado com sucesso!')
     except Exception as e:
         print("error: ", e)
         ...
@@ -44,11 +45,11 @@ def create(req):
     template_name = 'create_owners.html'
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
     def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_owners')
 
     if is_method_post(req):
@@ -65,11 +66,11 @@ def update(req, pk):
     template_name = 'update_owners.html'
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
     def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_owners')
 
     if is_method_post(req):
@@ -93,10 +94,12 @@ def delete(req, pk):
         if len(instance_owner.cars.all()) > 0:
             instance_owner.cars.clean()
 
-    store = StoreRepository.create_or_get('Carford')
+    store = StoreRepository.create_or_get()
     store.owners.delete(instance_owner)
 
     instance_owner.delete()
+
+    messages.success(req, 'Proprietário removido com sucesso!')
 
     return redirect('list_owners')
 

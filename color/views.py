@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -34,11 +35,11 @@ def create(req):
     context = {}
 
     def call_back_error(message):
-        return render(req, template_name, {'context': {
-            'message_error': message
-        }})
+        messages.error(req, message)
+        return render(req, template_name)
 
     def call_back_success(message):
+        messages.success(req, message)
         return redirect('list_colors')
 
     if is_method_post(req):

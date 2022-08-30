@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
+from django.contrib import messages
 # Create your views here.
 from car.repository.car_repository import CarRepository
 from owner.repository.owner_repository import OwnerRepository
@@ -21,9 +21,8 @@ def login(req):
             return redirect('dashboard')
 
         def call_back_error(message):
-            return render(req, template_name, {'context': {
-                'message_error': message
-            }})
+            messages.error(req, message)
+            return render(req, template_name)
 
         return auth(email=email, password=password, call_back_success=call_back_success,
                     call_back_error=call_back_error)
@@ -31,7 +30,9 @@ def login(req):
     return render(req, template_name)
 
 
+@login_required(login_url='/')
 def logout(request):
+    messages.success(request, 'Usuário deslogado com sucesso!')
     auth_logout(request)
     return redirect('/')
 
