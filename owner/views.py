@@ -19,6 +19,8 @@ def call_create(name, email, call_back_success, call_back_error):
             instance.name = name
             instance.email = email
             instance.save()
+            store = StoreRepository.create_or_get()
+            store.owners.add(instance)
             return call_back_success('Proprietário salvo com sucesso!')
 
     except Exception as e:
@@ -95,7 +97,9 @@ def delete(req, pk):
             instance_owner.cars.clean()
 
     store = StoreRepository.create_or_get()
-    store.owners.delete(instance_owner)
+
+    if len(store.owners.all()) > 0:
+        store.owners.remove(instance_owner)
 
     instance_owner.delete()
 

@@ -11,6 +11,14 @@ class CarRepository:
         return len(Car.objects.all())
 
     @staticmethod
+    def find_by_name(name):
+        try:
+            return Car.objects.get(name=name)
+        except:
+            ...
+        return None
+
+    @staticmethod
     def find_by_last():
         return Car.objects.all().order_by('-created_at').first()
 

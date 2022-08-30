@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+  mysqldb:
+    image: mysql:8.0.21
+    container_name: mysqldb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE_NAME: ${MYSQL_DATABASE_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+    healthcheck:
+        test: [ "CMD", "mysqladmin", "-u$MYSQL_USER", "-p$MYSQL_PASSWORD",  "ping", "-h", "localhost" ]
+        timeout: 20s
+        retries: 10
+  app:
+    build: .
+    env_file:
+      - .env
+    container_name: list-app
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - mysqldb
+    ports:
+      - "8000:8000"
+    environment:
+      MYSQL_DATABASE_NAME: ${MYSQL_DATABASE_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+
+volumes:
+  mysqldata:
+    driver: local
