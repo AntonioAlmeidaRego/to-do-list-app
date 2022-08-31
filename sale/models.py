@@ -15,3 +15,6 @@ class Sale(BaseModel):
 
     def __str__(self):
         return f'Preço: R${self.price} | Car: {self.car.name} | P: {self.owner.name}'
+
+    class Meta:
+        db_table = 'sales'

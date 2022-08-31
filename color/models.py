@@ -19,3 +19,6 @@ class Color(BaseModel):
 
     def __str__(self):
         return str_choices_color(self)
+
+    class Meta:
+        db_table = 'colors'

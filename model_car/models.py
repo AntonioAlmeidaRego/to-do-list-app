@@ -19,3 +19,6 @@ class ModelCar(BaseModel):
 
     def __str__(self):
         return str_choices_model(self)
+
+    class Meta:
+        db_table = 'model_cars'

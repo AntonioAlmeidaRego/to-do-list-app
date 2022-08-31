@@ -12,6 +12,7 @@ def auth(email=None, password=None, call_back_success=None, call_back_error=None
         if call_back_success:
             try:
                 user = User.objects.get(username=email)
+                print('email: ', user)
 
                 if not user:
                     return call_back_error(message_error)
@@ -22,6 +23,7 @@ def auth(email=None, password=None, call_back_success=None, call_back_error=None
                 user = authenticate(username=email, password=password)
                 return call_back_success(user)
 
-            except Exception:
+            except Exception as e:
+                print(e)
                 return call_back_error(message_error)
     return call_back_error(message_required)
